@@ -1,0 +1,209 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+
+	<title>Camel Presentation</title>
+
+	<meta name="description" content="A framework for easily creating beautiful presentations using HTML">
+	<meta name="author" content="Hakim El Hattab">
+
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+	<link rel="stylesheet" href="css/reveal.css">
+	<link rel="stylesheet" href="css/theme/white.css" id="theme">
+	<link rel="stylesheet" href="css/reveal-override.css" />
+
+	<!-- Theme used for syntax highlighting of code -->
+	<link rel="stylesheet" href="lib/css/zenburn.css">
+
+	<!-- Printing and PDF exports -->
+	<script>
+		var link = document.createElement('link');
+		link.rel = 'stylesheet';
+		link.type = 'text/css';
+		link.href = window.location.search.match(/print-pdf/gi) ? 'css/print/pdf.css' : 'css/print/paper.css';
+		document.getElementsByTagName('head')[0].appendChild(link);
+	</script>
+
+	<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+</head>
+
+<body>
+
+	<div class="reveal">
+
+		<!-- Any section element inside of this container is displayed as a slide -->
+		<div class="slides">
+
+
+			<!-- Slides are separated by three dashes (quick 'n dirty regular expression) -->
+			<section data-markdown data-separator="---">
+
+				<script type="text/template">
+
+
+
+<!-- .slide: class="center" -->
+# Apache Camel
+
+---
+## Enterprise Integrations are Complex
+<!-- .slide: class="image-right image-forty" -->
+![](./images/camel/enterprise-integration-example.png)
+- **Enterprises** have 100's of applications:
+	- Complex **communication patterns**
+	- Variety of **transports** - HTTP, Queues etc
+	- Variety of **protocols** - HTTP, JMS, AMQP
+- **Evolution of Cloud and Microservices** makes Enterprise Integration **even more complex**
+- How can we **simplify Enterprise Integrations**?
+	- Follow **Enterprise Integration Patterns**
+- How to implement Enterprise Integration Patterns?
+	- Use **Apache Camel**
+
+---
+## Apache Camel
+<!-- .slide: class="image-right image-thirty" -->
+
+![](./images/camel/camel-gears.png)
+- Open Source **Enterprise** Integration framework
+	- **Easily** integrate systems **consuming or producing** data
+- Inspired by **"Enterprise Integration Patterns"** - **Gregor Hohpe and Bobby Woolf**
+	- Evolved to Microservice Architectures and Cloud
+- **Lean** - Lightweight and Extensible:
+	- **Component architecture** keeps footprint low
+	- Provides **100+** components for databases, message queues, APIs, cloud integration etc
+	- Supports **200+** protocols, transports and data formats (& **300+** converters)
+	- Provides **Domain Specific Language (DSL)** customized to suit needs of Application Integration
+
+---
+
+## Camel - Terminology
+![](./images/camel/camel-example.png)
+<!-- .slide: class="image-right image-thirty one20" -->
+- Important Terminology:
+	- **Camel Context** - (0..n) Routes + Components + ..
+		- **Endpoint** - Reference to a queue, database or a file
+		- **Route** - Endpoints + Processor(s) + Transformer(s)
+		- **Components** - Extensions (Kafka, JSON, JMS etc)
+		- **Transformation**:
+			- Data format transformation - XML to JSON
+			- Data type transformation - String to CurrencyConversionBean
+	- **Message** - Body + Headers + Attachments
+	- **Exchange** - Request + Response
+		- Exchange ID
+		- Message Exchange Pattern (MEP) - InOnly/InOut
+		- Input Message and (Optional) Output Message
+
+
+---
+## Camel - Architecture
+![](https://camel.apache.org/manual/latest/_images/camel-components.png)
+
+---
+## Camel Context Example
+```
+//To start with
+CamelContext camelContext = new DefaultCamelContext();
+camelContext.addRoutes(new Route1());
+camelContext.addRoutes(new Route2());
+camelContext.addComponent("xyz",
+    XyzComponent.xyzComponentAutoAcknowledge(connectionFactory));
+
+camelContext.start();
+
+//At the end
+camelContext.stop();
+```
+
+---
+## References
+
+ 
+| Topic | Reference  | 
+|--|:--|
+|Why Camel?|https://camel.apache.org/manual/latest/faq/why-the-name-camel.html|
+|Camel Examples|https://github.com/apache/camel-examples/tree/master/examples|
+|Camel Spring Boot Configuration|https://camel.apache.org/camel-spring-boot/latest/spring-boot.html|
+|Complete Spring Boot Starters List|https://camel.apache.org/camel-spring-boot/latest/list.html|
+|Camel Spring Boot Examples|https://github.com/apache/camel-spring-boot-examples|
+|Enterprise Integration Patterns|https://camel.apache.org/components/latest/eips/enterprise-integration-patterns.html|
+
+---
+## What Next?
+<!-- .slide: class="image-right image-thirty one30" -->
+- https://github.com/in28minutes/learn
+	- Certifications 
+		- AWS, Azure and GCP
+	- DevOps 
+		- Docker, Kubernetes, Azure DevOps, Terraform and Ansible
+	- Serverless (AWS Lambda and Azure Functions)
+	- Full Stack (with Angular and React)
+	- Microservices (Spring Boot and Spring Cloud)
+
+[![Image](https://www.springboottutorial.com/images/Course-DockerCrashCourseForJavaSpringBootDevelopers.png "Docker Crash Course for Java Spring Boot Developers")](https://links.in28minutes.com/in28minutes-Docker)
+[![Image](https://www.springboottutorial.com/images/Course-KubernetesCrashCourse.png "Kubernetes Crash Course for Java Spring Boot Developers")](https://links.in28minutes.com/in28minutes-Kubernetes)
+[![Image](https://www.springboottutorial.com/images/Course-Go-Full-Stack-With-Spring-Boot-and-React.png "Go Full Stack with Spring Boot and React")](https://links.in28minutes.com/in28minutes-React)
+[![Image](https://www.springboottutorial.com/images/Course-Go-Full-Stack-With-SpringBoot-And-Angular.png "Go Full Stack with Spring Boot and Angular")](https://links.in28minutes.com/in28minutes-angular)
+[![Image](https://www.springboottutorial.com/images/Course-aws-certified-developer-assoiciate.png "AWS Developer Associate Certification")](https://links.in28minutes.com/aws-dev-associate-learn)
+[![Image](https://www.springboottutorial.com/images/Course-aws-architect-associate-certification.png "AWS Architect Associate Certification")](https://links.in28minutes.com/aws-architect-associate-certification)
+[![Image](https://www.springboottutorial.com/images/Course-go-serverless.png "Go Serverless with AWS Lambda and Azure Functions")](https://links.in28minutes.com/serverless-learn)
+
+</script>
+			</section>
+
+		</div>
+
+	</div>
+
+	<script src="lib/js/head.min.js"></script>
+	<script src="js/reveal.js"></script>
+
+
+	<script>
+
+		// More info https://github.com/hakimel/reveal.js#configuration
+		Reveal.initialize({
+			// The "normal" size of the presentation, aspect ratio will be preserved
+			// when the presentation is scaled to fit different resolutions
+			width: 1200,
+			height: 700,
+
+			// Factor of the display size that should remain empty around the content
+			margin: 0.04,
+
+			// Bounds for smallest/largest possible scale to apply to content
+			minScale: 0.2,
+			maxScale: 2.0,
+
+			controls: false,
+			progress: false,
+			history: true,
+			center: false,
+			slideNumber: true,
+			fragments: false,
+			transition: 'none', // none/fade/slide/convex/concave/zoom
+
+			// More info https://github.com/hakimel/reveal.js#dependencies
+			dependencies: [
+				{ src: 'lib/js/classList.js', condition: function () { return !document.body.classList; } },
+				{ src: 'plugin/markdown/marked.js', condition: function () { return !!document.querySelector('[data-markdown]'); } },
+				{ src: 'plugin/markdown/markdown.js', condition: function () { return !!document.querySelector('[data-markdown]'); } },
+				{ src: 'plugin/highlight/highlight.js', async: true, callback: function () { hljs.initHighlightingOnLoad(); } },
+				{ src: 'plugin/zoom-js/zoom.js', async: true },
+				{ src: 'plugin/notes/notes.js', async: true }
+			]
+		});
+
+
+	</script>
+
+</body>
+
+</html>

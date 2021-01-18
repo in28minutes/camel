@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+   <id>1000</id>
+   <from>USD</from>
+   <to>INR</to>
+   <conversionMultiple>70</conversionMultiple>
+</root>

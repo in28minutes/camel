@@ -1,20 +1,20 @@
-## Todo
+# Apache Camel - Simplify Enterprise Integration
 
-Security
-
-Configurable
-```
-route.from = your:queue
-from("{{route.from}}").to("{{route.to}}");
-```
+## Commands and Snippets
 
 ```
-camel.springboot.main-run-controller = true
-camel.springboot.duration-max-seconds = 60
-```
+keytool -genseckey -alias myDesKey -keypass someKeyPassword -keystore myDesKey.jceks -storepass someKeystorePassword -v -storetype JCEKS -keyalg DES
 
-```
-management.endpoints.web.exposure.include=mappings,metrics,shutdown
+private CryptoDataFormat createEncryptor() throws KeyStoreException, IOException, NoSuchAlgorithmException,
+		CertificateException, UnrecoverableKeyException {
+	KeyStore keyStore = KeyStore.getInstance("JCEKS");
+	ClassLoader classLoader = getClass().getClassLoader();
+	keyStore.load(classLoader.getResourceAsStream("myDesKey.jceks"), "someKeystorePassword".toCharArray());
+	Key sharedKey = keyStore.getKey("myDesKey", "someKeyPassword".toCharArray());
+
+	CryptoDataFormat sharedKeyCrypto = new CryptoDataFormat("DES", sharedKey);
+	return sharedKeyCrypto;
+}
 ```
 
 ## Diagrams

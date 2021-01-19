@@ -1,123 +1,7 @@
-
-```
-	<dependency>
-	<groupId>org.apache.camel.springboot</groupId>
-	<artifactId>camel-jackson-starter</artifactId>
-	<version>3.7.0</version>
-</dependency>
-
-<dependency>
-	<groupId>org.apache.camel.springboot</groupId>
-	<artifactId>camel-jacksonxml-starter</artifactId>
-</dependency>
-
-
-
-		from("activemq:my-custom-queue")
-		.unmarshal().json(JsonLibrary.Jackson, CurrencyExchange.class)
-		//.unmarshal().jacksonxml(CurrencyExchange.class)
-		.bean(currencyExchangeRepository)
-		.to("log:received-from-active-mq");		
-
-		   public void configure() throws Exception {
-   	from("file:data/xml?delay=5000&noop=false&delete=false")
-   	
-       .to("log:output");
-   }
-	
-
-```
-
-
-```
-<dependency>
-	<groupId>org.apache.camel.springboot</groupId>
-	<artifactId>camel-kafka-starter</artifactId>
-	<version>3.7.0</version>
-</dependency>
-
-
-
-camel.component.kafka.brokers=localhost:9092
-
-//sudo vi /private/etc/hosts
-from("file:files/json")
-.setHeader(KafkaConstants.KEY, constant("Camel")) // Key of the message
-.log("Sending message to Kafka : ${body}")
-.to("kafka:myTopic");
-
-
-from("kafka:myTopic")
-.unmarshal().json(JsonLibrary.Jackson, CurrencyExchange.class)
-//.bean(currencyExchangeRepository)
-.to("log:received-from-kafka");
-
-```
-
-
-Consume Rest API
-
-```java
-
-	@GetMapping("/currency-exchange/from/{from}/to/{to}")
-	return new CurrencyExchange(1000L, from, to, BigDecimal.TEN,"kafka");
-
-public class CurrencyExchange {
-	
-	private Long id;
-	
-	private String from;
-	
-	private String to;
-
-	private BigDecimal conversionMultiple;
-
-	private String environment;
-
-
-		<dependency>
-			<groupId>org.apache.camel.springboot</groupId>
-			<artifactId>camel-http-starter</artifactId>
-			<version>3.7.0</version>
-		</dependency>
-
-    public void configure() throws Exception {
-    	restConfiguration().host("localhost").port(8000);
-
-        from("timer:hello?period=5000")
-            .setHeader("from", () -> "USD")
-            .setHeader("to", () -> "INR")
-            .to("rest:get:/currency-exchange/from/{from}/to/{to}")
-            .log("${body}");
-
-    	
-    }
-
-
-```
-
 ### /src/main/java/com/in28minutes/microservices/currencyexchangeservice/route1/FileCopierRouter.java
 
 ```java	
-   @Override
-   public void configure() throws Exception {
-   	from("file:data/from?delay=5000&noop=false&delete=false")
-   	.process((exchange) -> {
-   		System.out.println(exchange);
-   		System.out.println(exchange.getContext());
-   		System.out.println(exchange.getExchangeId());
-   		System.out.println(exchange.getMessage().getBody());
-   		//exchange.getMessage().setHeader(null, exchange);    		
-   	})
-   	.log("    ${messageHistory}")
-       .to("log:output");
-   }
-
-   	.log("${file:name} ${file:name.ext} ${file:name.noext} ${file:onlyname}")
-   	.log("${file:onlyname.noext} ${file:parent} ${file:path} ${file:absolute}")
-   	.log("${file:size} ${file:modified}")
-   	.log("${messageHistory}")
-   	.log("${routeId} ${camelId} ${body}")
+   	
 
 //    @Override
 //    public void configure() throws Exception {
@@ -150,6 +34,13 @@ public class CurrencyExchange {
 //			simple("${file:ext} in ('xml','json')")
 //			simple("${file:ext} range '0..49'")
 
+   	.log("${messageHistory}")
+
+   	.log("${file:name} ${file:name.ext} ${file:name.noext} ${file:onlyname}")
+   	.log("${file:onlyname.noext} ${file:parent} ${file:path} ${file:absolute}")
+   	.log("${file:size} ${file:modified}")
+   	.log("${routeId} ${camelId} ${body}")
+
 
 //	@Override
 //	public void configure() throws Exception {
@@ -161,36 +52,6 @@ public class CurrencyExchange {
 //		.to("bean:someBean?method=printThis");
 //	}
 
-//	@Override
-//	public void configure() throws Exception {
-//		from("file:data/json?delay=5000&noop=false&delete=false")
-//		.transform(body().regexReplaceAll("conversionMultiple", "conversion_multiple"))
-//		.to("bean:someBean?method=printThis");
-//	}
-
-
-<dependency>
-	<groupId>org.apache.camel.springboot</groupId>
-	<artifactId>camel-csv-starter</artifactId>
-</dependency>
-
-
-//	@Override
-//	public void configure() throws Exception {
-//		from("file:data/csv?delay=5000&noop=false&delete=false")
-//		.unmarshal().csv()
-//	    .split(body())
-//	    .to("bean:someBean?method=printThis");		
-//	}
-	
-	@Override
-	public void configure() throws Exception {
-		from("file:data/csv?delay=5000&noop=false&delete=false")
-		.convertBodyTo(String.class)
-	    .to("bean:someBean?method=printThis");
-	}	
-
-}
 
 @Component 
 class SomeBean
@@ -303,7 +164,27 @@ import com.in28minutes.microservices.currencyexchangeservice.CurrencyExchange;
 public class PatternsRouter extends RouteBuilder {
 
 	
+<dependency>
+	<groupId>org.apache.camel.springboot</groupId>
+	<artifactId>camel-csv-starter</artifactId>
+</dependency>
+
+
+//	@Override
+//	public void configure() throws Exception {
+//		from("file:data/csv?delay=5000&noop=false&delete=false")
+//		.unmarshal().csv()
+//	    .split(body())
+//	    .to("bean:someBean?method=printThis");		
+//	}
 	
+	@Override
+	public void configure() throws Exception {
+		from("file:data/csv?delay=5000&noop=false&delete=false")
+		.convertBodyTo(String.class)
+	    .to("bean:someBean?method=printThis");
+	}	
+
 	
 //	@Override
 	//	public void configure() throws Exception {

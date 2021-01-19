@@ -6,3 +6,9 @@ Ensure that the data format is valid and the associated Camel component is prese
 
 
 java.net.UnknownHostException: 3f2b68cf485c
+
+{CamelFileAbsolute=false, CamelFileAbsolutePath=/in28Minutes/git/camel/02.projects/camel-microservice-a/files/input/1000.json, CamelFileLastModified=1610976220529, CamelFileLength=76, CamelFileName=1000.json, CamelFileNameConsumed=1000.json, CamelFileNameOnly=1000.json, CamelFileParent=files/input, CamelFilePath=files/input/1000.json, CamelFileRelativePath=1000.json}
+
+{CamelFileAbsolute=false, CamelFileAbsolutePath=/in28Minutes/git/camel/02.projects/camel-microservice-a/files/input/1000.json, CamelFileLastModified=1610976220529, CamelFileLength=76, CamelFileName=1000.json, CamelFileNameConsumed=1000.json, CamelFileNameOnly=1000.json, CamelFileParent=files/input, CamelFilePath=files/input/1000.json, CamelFileRelativePath=1000.json} 
+
+{CamelBatchSize=1, CamelBatchComplete=true, CamelBatchIndex=0, CamelFilterMatched=false, CamelFileExchangeFile=GenericFile[1000.json]}
